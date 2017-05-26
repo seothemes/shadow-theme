@@ -128,7 +128,6 @@ input[type="search"] {
 	display: table;
 }
 
-
 /* Defaults
 ---------------------------------------------------------------------------------------------------- */
 
@@ -179,6 +178,7 @@ a {
     border-bottom: 1px dotted $color-border;
     -webkit-transition: color .2s ease-in-out;
     transition: color .2s ease-in-out;
+	word-wrap: break-word;
 }
 
 a:hover {
@@ -189,6 +189,12 @@ p {
 	margin: 0 0 30px;
 	padding: 0;
 	color: $color-body;
+
+	&:before,
+	&:after {
+		content: " ";
+		display: table;
+	}
 }
 
 ol,
@@ -223,6 +229,10 @@ blockquote {
 	margin: 40px 20px;
 	padding: 0 20px;
 	border-left: 1px dotted $color-border;
+}
+
+figure {
+	margin: 1em auto;
 }
 
 /* Headings
@@ -403,25 +413,46 @@ input[type="search"]::-webkit-search-results-button {
 --------------------------------------------- */
 
 table {
-	border-collapse: collapse;
+	color: $color-body;
+	border-collapse: separate;
+	border: 1px solid $color-border;
+	border-radius: 5px;
 	border-spacing: 0;
 	line-height: 2;
 	margin-bottom: 40px;
 	width: 100%;
 }
 
-tbody {
-	border-bottom: 1px solid $color-body;
+tr {
+
+	&:first-of-type {
+		border-radius: 5px 5px 0 0;
+
+		td {
+			border-top: none;
+		}
+	}
+}
+
+th {
+	font-weight: bolder;
 }
 
 td,
 th {
 	text-align: left;
+	border-right: 1px solid $color-border;
+	padding: 0.5em;
+
+	&:last-of-type {
+		border-right: none;
+	}
+
 }
 
 td {
-	border-top: 1px solid $color-body;
-	padding: 6px 0;
+	font-size: 16px;
+	border-top: 1px solid $color-border;
 }
 
 /* Structure and Layout
@@ -575,6 +606,7 @@ td {
 .entry-title {
 	color: $color-white;
 	margin-bottom: 0;
+	word-break: break-word;
 }
 
 .entry-title a {
@@ -1128,12 +1160,28 @@ img.alignright,
 
 	img {
 		max-width: 100%;
+		display: block;
+	}
+
+	p {
+		word-break: break-word;
 	}
 }
 
 .entry-image-link {
 	display: block;
 	border-bottom: none;
+}
+
+.entry + .alert {
+	display: none; // Hardcoded in Genesis :(
+}
+
+.post-password-form {
+
+	input[type="submit"] {
+		margin-top: 10px;
+	}
 }
 
 /* Entry Meta
@@ -1146,6 +1194,7 @@ p.entry-meta {
 .entry-categories,
 .entry-tags {
 	display: block;
+	white-space: normal;
 }
 
 .entry-comments-link::before {
@@ -1177,6 +1226,8 @@ p.entry-meta {
 
 .archive-pagination li {
 	display: inline;
+	margin-top: 1em;
+	display: inline-block;
 }
 
 .archive-pagination li a {
@@ -1200,7 +1251,10 @@ p.entry-meta {
 
 .comments {
 	background-color: $color-input;
-	padding: 50px 0 0;
+
+	> div:first-of-type {
+		padding-top: 50px;
+	}
 }
 
 .comments .entry-comments,
@@ -1274,6 +1328,10 @@ p.form-submit,
 	padding-left: 66px;
 }
 
+.comment-content p {
+	word-break: break-word;
+}
+
 /* Site Footer
 ---------------------------------------------------------------------------------------------------- */
 
@@ -1281,6 +1339,10 @@ p.form-submit,
 	padding: 100px 0;
 	text-align: center;
 	border-top: 1px solid $color-light;
+
+	.archive & {
+		margin-top: 50px;
+	}
 
 	p {
 		margin-bottom: 0;
@@ -1499,6 +1561,11 @@ p.form-submit,
 		margin-right: 0;
 	}
 
+	.entry-header .entry-categories {
+		max-height: 8em;
+		overflow: hidden;
+	}
+
 	.entry-header .entry-categories a, 
 	.entry-header .entry-tags a {
 		display: block;
@@ -1511,12 +1578,12 @@ p.form-submit,
 
 	.entry-content {
 		padding: 50px 0;
-	}
 
-	.entry-content img {
-		max-width: calc(100% + 200px);
-		width: calc(100% + 200px);
-		margin: 50px -100px;
+		img.unwrap {
+			max-width: calc(100% + 200px);
+			width: calc(100% + 200px);
+			margin: 50px -100px;
+		}
 	}
 	
 	.after-entry .widget {
@@ -1524,7 +1591,10 @@ p.form-submit,
 	}
 
 	.comments {
-		padding: 100px 0 0;
+
+		> div:first-of-type {
+			padding-top: 100px;
+		}
 	}
 
 	.comments .entry-comments,
@@ -1644,6 +1714,13 @@ p.form-submit,
 
 	.site-footer h2 {
 		font-size: 28px;
+	}
+
+	.site-footer {
+
+		.archive & {
+			margin-top: 100px;
+		}
 	}
 
 	.ea-share-count-wrap.after_content {

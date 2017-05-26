@@ -11,6 +11,13 @@ jQuery(function( $ ) {
 		$(".nav-primary").slideToggle();
 	});
 
+	// Add class to image if wider than content.
+	$('.entry-content img').each( function() {
+		if( $(this).width() > 539 ) {
+			$(this).addClass('unwrap');
+		}
+	} );
+
 	// Remove menu open class on bigger screens. 
 	$(window).resize(function(){
 		if(window.innerWidth > 767) {

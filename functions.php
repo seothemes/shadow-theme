@@ -56,6 +56,9 @@ add_theme_support( 'genesis-responsive-viewport' );
 // Add support for custom background.
 add_theme_support( 'custom-background' );
 
+// Add support for post thumbnails.
+add_theme_support( 'post-thumbnails' );
+
 // Add support for after entry widget.
 add_theme_support( 'genesis-after-entry-widget-area' );
 

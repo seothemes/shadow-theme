@@ -114,6 +114,47 @@ function shadow_minify_css( $css ) {
 }
 
 /**
+ * Modify the WordPress read more link.
+ *
+ * The below code modifies the default read more link when
+ * using the WordPress More Tag to break a post on your site.
+ */
+function shadow_read_more() {
+	return '<a class="more-link" href="' . get_permalink() . '">Read more</a>';
+}
+add_filter( 'the_content_more_link', 'shadow_read_more' );
+
+
+/**
+ * Display featured image.
+ * 
+ * This hooks the featured image into the entry content
+ * section of a post. First checks if settings are set
+ * to display featured images.
+ *
+ * @return array Featured image size.
+ */
+function shadow_display_featured_image() {
+
+	// Return early if not a post.
+	if ( ! is_singular( 'post' ) ) {
+		return;
+	}
+
+	// Get Genesis theme settings.
+	$genesis_settings = get_option( 'genesis-settings' );
+
+	// Check featured image option.
+	if ( 1 !== $genesis_settings['content_archive_thumbnail'] ) {
+		return;
+	}
+
+	// Display featured image.
+	the_post_thumbnail( 'post-image' );
+}
+add_action( 'genesis_entry_content', 'shadow_display_featured_image', 6 );
+
+/**
  * Display page excerpts.
  *
  * Adds custom page excerpts beneath the entry title on single
@@ -178,6 +219,14 @@ function shadow_post_info_filter( $post_info ) {
 	return $post_info;
 }
 add_filter( 'genesis_post_info', 'shadow_post_info_filter' );
+
+/**
+ * List the post tags before the content
+ *
+ * @author Reasons to Use Genesis
+ * @link http://reasonstousegenesis.com/list-tags/
+ */
+add_action( 'genesis_entry_header', 'get_the_tag_list', 100 );
 
 /**
  * Reposition breadcrumbs.

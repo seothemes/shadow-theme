@@ -166,7 +166,8 @@ function shadow_customizer_output() {
 		a,
 		p,
 		ol,
-		ul {
+		ul,
+		table {
 			color: %1$s;
 		}
 

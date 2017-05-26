@@ -51,6 +51,8 @@ After you have activated the Shadow theme, a Recommended Plugins notice will app
 
 ## Import Demo Content
 
+***IMPORTANT: Delete any unwanted widgets, posts, pages and comments BEFORE importing demo content***
+
 Once the recommended plugins have been installed it is safe to import the theme demo content and widget demo content. To import the content used in the Shadow theme demo site, navigate to ***Tools > Import*** and then select ***WordPress > Run***. This will take you to the **Import** settings page where you can upload the *sample.xml* file included with the theme.
 
 
