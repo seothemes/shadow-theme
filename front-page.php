@@ -15,9 +15,6 @@
  * @license      GPL-2.0+
  */
 
-// Remove pagination (optional).
-remove_action( 'genesis_after_endwhile', 'genesis_posts_nav' );
-
 /**
  * Check for content.
  *
@@ -72,12 +69,23 @@ function shadow_frontpage() {
 			'ignore_sticky_posts' => true,
 		) );
 
-		printf( '<a href="%1$s">%2$s</a>', esc_url( $posts_page ), esc_html( $link_text ) );
+		printf( '<a class="button" href="%1$s">%2$s</a>', esc_url( $posts_page ), esc_html( $link_text ) );
 		shadow_wrap_close();
 		echo '</div>';
 	}
 }
 add_action( 'genesis_after_loop', 'shadow_frontpage' );
+
+/**
+ * Remove pagination (optional).
+ *
+ * Only remove the pagination if displaying a static front
+ * page. If you would prefer to keep pagination then just
+ * remove this block of code. 
+ */
+if ( 'page' === get_option( 'show_on_front' ) ) {
+	remove_action( 'genesis_after_endwhile', 'genesis_posts_nav' );
+}
 
 // Run Genesis.
 genesis();

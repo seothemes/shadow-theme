@@ -418,11 +418,12 @@ input[type="submit"],
 	background-color: $color-heading;
 	border: 0;
 	font-weight: 400;
+	font-size: 1rem;
 	line-height: 1;
 	border-radius: 3px;
 	color: $color-white;
 	cursor: pointer;
-	padding: 10px 24px 11px;
+	padding: 0.75em 2em;
 	width: auto;
 	-webkit-transition: all 0.3s ease-in-out;
 	-moz-transition:    all 0.3s ease-in-out;
@@ -546,6 +547,7 @@ td {
 
 	.home.blog & {
 		padding-top: 60px;
+		padding-bottom: 30px;
 	}
 }
 
@@ -673,6 +675,7 @@ div.archive-description,
 .entry-title {
 
 	.error404 & {
+		margin-top: 50px;
 		color: $color-heading;
 	}
 }
@@ -1100,6 +1103,7 @@ img.alignright,
 .entry {
 
 	.error404 & {
+		width: 90%;
 		max-width: 540px;
 		margin: 50px auto;
 	}
@@ -1525,6 +1529,7 @@ p.form-submit,
 
 		.home.blog & {
 			padding-top: 120px;
+			padding-bottom: 60px;
 		}
 	}
 
@@ -1669,7 +1674,7 @@ p.form-submit,
 		padding-top: 100px;
 
 		.author-name {
-			margin: 20px 0 -25px 0.1em;
+			margin: 20px 0 0 0.1em;
 		}
 
 		.single &,
