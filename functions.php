@@ -16,18 +16,6 @@
 // Start the engine.
 include_once( get_template_directory() . '/lib/init.php' );
 
-// Include theme helper functions.
-include_once( get_stylesheet_directory() . '/includes/theme-functions.php' );
-
-// Include theme default settings.
-include_once( get_stylesheet_directory() . '/includes/theme-defaults.php' );
-
-// Include theme customizer settings.
-include_once( get_stylesheet_directory() . '/includes/theme-customize.php' );
-
-// Include theme recommended plugins.
-include_once( get_stylesheet_directory() . '/includes/theme-plugins.php' );
-
 // Child theme (do not remove).
 define( 'CHILD_THEME_NAME', 'Shadow' );
 define( 'CHILD_THEME_URL', 'https://seothemes.net/shadow/' );
@@ -62,6 +50,9 @@ add_theme_support( 'post-thumbnails' );
 // Add support for after entry widget.
 add_theme_support( 'genesis-after-entry-widget-area' );
 
+// Enable selective refresh and Customizer edit icons.
+add_theme_support( 'customize-selective-refresh-widgets' );
+
 // Remove secondary navigation menu.
 add_theme_support( 'genesis-menus', array( 
 	'primary' => __( 'Header Menu', 'genesis' ),
@@ -85,6 +76,29 @@ add_theme_support( 'genesis-structural-wraps', array(
 	'footer',
 ) );
 
+// Enable Accessibility support.
+add_theme_support( 'genesis-accessibility', array(
+	'404-page',
+	'drop-down-menu',
+	'headings',
+	'rems',
+	'search-form',
+	'skip-links',
+) );
+
+// Add support for post formats.
+add_theme_support( 'post-formats', array(
+	'aside',
+	'audio',
+	'chat',
+	'gallery',
+	'image',
+	'link',
+	'quote',
+	'status',
+	'video',
+) );
+
 // Enable Logo option in Customizer > Site Identity.
 add_theme_support( 'custom-logo', array(
 	'height'      => 60,
@@ -96,7 +110,7 @@ add_theme_support( 'custom-logo', array(
 
 // Enable theme support for custom header background image.
 add_theme_support( 'custom-header', array(
-	'header-selector' 	=> '.entry-header',
+	'header-selector' 	=> '.entry-header, .archive-description',
 	'header_image'    	=> get_stylesheet_directory_uri() . '/assets/images/hero.jpg',
 	'header-text'     	=> false,
 	'width'           	=> 1920,
@@ -126,9 +140,6 @@ add_action( 'genesis_entry_content', 'genesis_do_post_image', 13 );
 // Reposition after entry widget.
 remove_action( 'genesis_after_entry', 'genesis_after_entry_widget_area' );
 add_action( 'genesis_entry_footer', 'genesis_after_entry_widget_area' );
-
-// Remove the entry meta in the entry footer.
-remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 
 // Force full-width-content layout setting.
 add_filter( 'genesis_site_layout', '__genesis_return_full_width_content' );
@@ -163,7 +174,19 @@ function shadow_scripts_styles() {
 	// Load Google Fonts.
 	wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Open+Sans:300,400', array(), CHILD_THEME_VERSION );
 
-	// Load custom scripts
+	// Load custom scripts.
 	wp_enqueue_script( 'custom-scripts', get_bloginfo( 'stylesheet_directory' ) . '/assets/scripts/scripts.min.js', array( 'jquery' ), CHILD_THEME_VERSION );
 }
 add_action( 'wp_enqueue_scripts', 'shadow_scripts_styles' );
+
+// Include theme helper functions.
+include_once( get_stylesheet_directory() . '/includes/theme-functions.php' );
+
+// Include theme default settings.
+include_once( get_stylesheet_directory() . '/includes/theme-defaults.php' );
+
+// Include theme customizer settings.
+include_once( get_stylesheet_directory() . '/includes/theme-customize.php' );
+
+// Include theme recommended plugins.
+include_once( get_stylesheet_directory() . '/includes/theme-plugins.php' );

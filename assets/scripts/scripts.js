@@ -37,7 +37,7 @@ jQuery(function( $ ) {
 
 	// Fade out titles.
 	$(document).on("scroll", function() {
-    	$(".single .entry-header .wrap, .page .entry-header .wrap").css("opacity", 1 - $(window).scrollTop() / 400);
+    	$(".single .content > .entry .entry-header .wrap, .page .content > .entry .entry-header .wrap, .archive-description .wrap").css("opacity", 1 - $(window).scrollTop() / 400);
   	});
 
   	$(window).scroll(function(e){
@@ -47,7 +47,7 @@ jQuery(function( $ ) {
   	// Parallax.
   	function parallax(){
   		var scrolled = $(window).scrollTop();
-  		$('.single .entry-header .wrap, .page .entry-header .wrap').css({
+  		$('.single .content > .entry .entry-header .wrap, .page .content > .entry .entry-header .wrap, .archive-description .wrap').css({
 			transform: "translate3d(0, "+ (scrolled*0.25) +"px, 0)"
 		});
   	}

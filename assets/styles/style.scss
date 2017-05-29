@@ -18,6 +18,7 @@
 	- Baseline Normalize
 	- Box Sizing
 	- Float Clearing
+	- Accessibility
 - Defaults
 	- Typographical Elements
 	- Headings
@@ -126,6 +127,49 @@ input[type="search"] {
 	clear: both;
 	content: " ";
 	display: table;
+}
+
+/* ## Accessibility
+--------------------------------------------- */
+
+.screen-reader-text,
+.screen-reader-text span,
+.screen-reader-shortcut,
+.wp-custom-logo .site-title,
+.wp-custom-logo .site-description {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}
+
+.screen-reader-text:focus,
+.screen-reader-shortcut:focus {
+	clip: auto !important;
+	height: auto;
+	width: auto;
+	display: block;
+	padding: 15px 23px 14px;
+	z-index: 100000;
+	text-decoration: none;
+	box-shadow: 0 0 2px 2px black( 0.1 );
+}
+
+.genesis-skip-link {
+	margin: 0;
+
+	li {
+		height: 0;
+		width: 0;
+		list-style: none;
+	}
+}
+
+.more-link {
+	display: inline-block;
+	clear: both;
 }
 
 /* Defaults
@@ -499,12 +543,10 @@ td {
 
 .site-inner {
 	clear: both;
-	padding-top: 60px;
-}
 
-.page .site-inner,
-.single .site-inner {
-	padding-top: 0;
+	.home.blog & {
+		padding-top: 60px;
+	}
 }
 
 .wrap {
@@ -552,12 +594,16 @@ td {
 	font-size: 14px;
 }
 
-.archive-description,
+div.archive-description,
 .author-box {
 	border-bottom: 1px solid $color-input;
 	font-size: 18px;
 	margin-bottom: 60px;
 	padding-bottom: 30px;
+	padding: 120px 0 70px;
+	background-size: cover !important;
+	background-position: center !important;
+	box-shadow: inset 0 0 0 9999px rgba(36, 43, 47, 0.8);
 }
 
 .single .author-box {
@@ -600,9 +646,10 @@ td {
 --------------------------------------------- */
 
 .archive-title {
-	font-size: 24px;
+	font-size: 36px;
 }
 
+.archive-title,
 .entry-title {
 	color: $color-white;
 	margin-bottom: 0;
@@ -621,6 +668,13 @@ td {
 .widget-title {
 	font-size: 20px;
 	margin-bottom: 20px;
+}
+
+.entry-title {
+
+	.error404 & {
+		color: $color-heading;
+	}
 }
 
 /* WordPress
@@ -882,6 +936,8 @@ img.alignright,
 	line-height: 1;
 	width: 100%;
 	padding-top: 20px;
+	font-size: 16px;
+	font-weight: bolder;
 
 	.menu-item {
 		display: block;
@@ -913,11 +969,6 @@ img.alignright,
 		position: relative;
 		border-radius: 3px;
 		display: none;
-		-webkit-transition: opacity .4s ease-in-out, top .4s ease;
-		-moz-transition:    opacity .4s ease-in-out, top .4s ease;
-		-ms-transition:     opacity .4s ease-in-out, top .4s ease;
-		-o-transition:      opacity .4s ease-in-out, top .4s ease;
-		transition:         opacity .4s ease-in-out, top .4s ease;
 		z-index: 99;
 
 		.menu-item {
@@ -1032,9 +1083,30 @@ img.alignright,
 .entry-header .wrap,
 .entry-content .wrap,
 .entry-footer .wrap,
-.breadcrumb .wrap {
+.breadcrumb .wrap,
+.archive-description .wrap,
+.entry-tags,
+.front-page-posts .wrap {
+	width: 100%;
 	max-width: 540px;
 	margin: 0 auto;
+}
+
+.wrap .wrap {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.entry {
+
+	.error404 & {
+		max-width: 540px;
+		margin: 50px auto;
+	}
+
+	.home .content > & {
+		margin-bottom: 0;
+	}
 }
 
 /* Entry Header
@@ -1074,7 +1146,6 @@ img.alignright,
 	}
 
 	.entry-time {
-		margin-bottom: 2em;
 		display: block;
 	}
 
@@ -1086,7 +1157,8 @@ img.alignright,
 	}
 
 	.blog &,
-	.category & {
+	.category &,
+	.archive & {
 		background: none !important;
 	}
 
@@ -1102,6 +1174,35 @@ img.alignright,
 	.page & .entry-meta b {
 		color: $color-white;
 	}
+
+	.front-page-posts & {
+		padding: 0;
+		background: none !important;
+		box-shadow: none;
+
+		.entry-meta b {
+			color: $color-heading;
+		}
+	}
+
+	.author-name {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		font-size: 14px;
+		margin: 20px 0 0 0.1em;
+		vertical-align: middle;
+		text-transform: capitalize;
+
+		a {
+			margin: 0.1em 0.618em 0 0.382em;
+		}
+	}
+}
+
+.front-page-posts {
+	border-top: 1px solid $color-light;
+	padding: 50px 0;
 }
 
 /* Entry Content
@@ -1166,6 +1267,17 @@ img.alignright,
 	p {
 		word-break: break-word;
 	}
+
+	.single &,
+	.page & {
+		padding: 60px 0 40px;
+	}
+
+	.blog &,
+	.archive &,
+	.front-page-posts & {
+		padding: 20px 0;
+	}
 }
 
 .entry-image-link {
@@ -1202,6 +1314,13 @@ p.entry-meta {
 	margin: 0 6px 0 2px;
 }
 
+.entry-tags {
+
+	.single & {
+		padding: 10% 5% 5%;
+	}
+}
+
 /* After Entry
 --------------------------------------------- */
 
@@ -1216,8 +1335,12 @@ p.entry-meta {
 .pagination {
 	clear: both;
 	max-width: 540px;
-	margin: 0 auto 50px;
+	margin: 50px auto 100px;
 	padding: 0 5%;
+
+	.front-page-posts & {
+		padding: 0;
+	}
 }
 
 .adjacent-entry-pagination {
@@ -1237,8 +1360,9 @@ p.entry-meta {
 	cursor: pointer;
 	display: inline-block;
 	font-size: 16px;
-	padding: 8px 12px;
+	padding: 6px 10px;
 	border-bottom: none;
+	transition: background-color 0.2s ease;
 }
 
 .archive-pagination li a:hover,
@@ -1397,6 +1521,13 @@ p.form-submit,
 		padding-right: 0;
 	}
 
+	.site-inner {
+
+		.home.blog & {
+			padding-top: 120px;
+		}
+	}
+
 	.site-header {
 		padding: 20px 0;
 		height: auto;
@@ -1466,7 +1597,7 @@ p.form-submit,
 			top: 400px;
 			opacity: 0;
 			position: absolute;
-			padding-top: 20px;
+			padding-top: 10px;
 			display: block;
 
 			a {
@@ -1527,21 +1658,37 @@ p.form-submit,
 		margin-bottom: 0;
 	}
 
-	.site-inner {
-		padding-top: 90px;
+	.entry {
+
+		.error404 & {
+			margin: 100px auto;
+		}
 	}
 
 	.entry-header {
 		padding-top: 100px;
+
+		.author-name {
+			margin: 20px 0 -25px 0.1em;
+		}
+
+		.single &,
+		.page & {
+			padding: 280px 0;
+		}
+
+		.front-page-posts & {
+			padding: 100px 0 0;
+		}
 	}
 
+	.archive-title,
 	.entry-title {
 		font-size: 54px;
 	}
 
-	.single .entry-header,
-	.page .entry-header {
-		padding: 280px 0 200px;
+	div.archive-description {
+		padding: 250px 0 180px;
 	}
 
 	.entry-header .entry-meta {
@@ -1571,19 +1718,43 @@ p.form-submit,
 		display: block;
 	}
 
-	.single .entry-content,
-	.page .entry-content {
-		padding: 100px 0;
+	.entry-time {
+		margin-bottom: 2em;
+		display: block;
+	}
+
+	.entry-tags {
+
+		.single & {
+			padding: 100px 0 0;
+		}
 	}
 
 	.entry-content {
 		padding: 50px 0;
 
+		.single &,
+		.page & {
+			padding: 100px 0;
+		}
+
+		.front-page-posts & {
+			padding: 50px 0 0;
+		}
+
 		img.unwrap {
 			max-width: calc(100% + 200px);
 			width: calc(100% + 200px);
 			margin: 50px -100px;
+
+			&.wp-post-image {
+				margin-top: 0;
+			}
 		}
+	}
+
+	.front-page-posts {
+		padding: 100px 0;
 	}
 	
 	.after-entry .widget {
@@ -1608,7 +1779,7 @@ p.form-submit,
 	}
 
 	.pagination {
-		margin-bottom: 100px;
+		margin: 100px auto;
 		padding: 0;
 	}
 

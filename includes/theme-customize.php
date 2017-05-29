@@ -45,11 +45,23 @@ $shadow_colors = array(
  */
 function shadow_customizer_register( $wp_customize ) {
 
-	// Make sure preview refreshes on change.
-	$wp_customize->get_setting( 'header_image' )->transport = 'refresh';
-
 	// Globals.
 	global $wp_customize, $shadow_colors;
+
+	// Custom 'Front Page Displays' control choices.
+	$choices = array(
+		'posts'       => __( 'Your latest posts', 'shadow' ),
+		'page'        => __( 'A static page & recent posts', 'shadow' ),
+	);
+
+	// Modify the default 'Front Page Displays' controls.
+	$wp_customize->get_control( 'show_on_front' )->choices  = $choices;	
+
+	// Rename 'Static Front Page' section to 'Front Page Settings'.
+	$wp_customize->get_section( 'static_front_page' )->title = __( 'Front Page Settings', 'shadow' );
+
+	// Make sure preview refreshes on change.
+	$wp_customize->get_setting( 'header_image' )->transport = 'refresh';
 
 	// Loop through array and display colors.
 	foreach ( $shadow_colors as $id => $hex ) {
@@ -79,6 +91,80 @@ function shadow_customizer_register( $wp_customize ) {
 			)
 		);
 	}
+
+	// Add front page recent posts setting.
+	$wp_customize->add_setting(
+		'shadow_frontpage_show_posts',
+		array(
+		    'default'           => 'true',
+		    'type'              => 'option',
+		)
+	);
+
+	// Add front page recent posts control.
+	$wp_customize->add_control(
+		'shadow_frontpage_show_posts',
+		array(
+			'label'       => __( 'Display recent posts', 'shadow' ),
+			'description' => __( 'Select whether to show the recent posts beneath the page content on the front page.', 'shadow' ),
+			'section'     => 'static_front_page',
+			'settings'    => 'shadow_frontpage_show_posts',
+			'type'        => 'radio',
+			'choices'	  => array(
+				'true'  => __( 'Show recent posts', 'shadow' ),
+				'false' => __( 'Hide recent posts', 'shadow' ),
+			),
+	    )
+	);
+
+	// Add front page recent posts title setting.
+	$wp_customize->add_setting(
+		'shadow_frontpage_posts_title',
+		array(
+		    'default'           => __( 'Recent Posts', 'shadow' ),
+		    'type'              => 'option',
+			'sanitize_callback' => 'esc_html',
+		)
+	);
+
+	// Add front page recent posts title control.
+	$wp_customize->add_control(
+		'shadow_frontpage_posts_title',
+		array(
+			'label'       => __( 'Recent posts title', 'shadow' ),
+			'description' => __( 'Enter a title to show above the recent posts. Note that this is only displayed if the Display recent posts setting is set to true. Leave blank for no title.', 'shadow' ),
+			'section'     => 'static_front_page',
+			'settings'    => 'shadow_frontpage_posts_title',
+			'type'        => 'text',
+	    )
+	);
+
+	// Add front page recent posts per page setting.
+	$wp_customize->add_setting(
+		'shadow_frontpage_posts_per_page',
+		array(
+		    'default'           => 4,
+		    'type'              => 'option',
+			'sanitize_callback' => 'shadow_sanitize_number',
+		)
+	);
+
+	// Add front page recent posts per page control.
+	$wp_customize->add_control(
+		'shadow_frontpage_posts_per_page',
+		array(
+			'label'       => __( 'Number of posts', 'shadow' ),
+			'description' => __( 'Enter the amount of posts to display on the front page. Note that this only controls the number of posts for the Static Front Page.', 'shadow' ),
+			'section'     => 'static_front_page',
+			'settings'    => 'shadow_frontpage_posts_per_page',
+			'type'        => 'number',
+			'input_attrs' => array(
+				'min' => 0,
+				'max' => 100,
+				'step' => 1,
+			),
+	    )
+	);
 }
 add_action( 'customize_register', 'shadow_customizer_register' );
 
@@ -136,7 +222,9 @@ function shadow_customizer_output() {
 
 		body,
 		.entry-title a,
-		.entry-header .entry-meta b {
+		.entry-header .entry-meta b,
+		.error404 .entry-title,
+		.front-page-posts .entry-header .entry-meta b {
 			color: %1$s;			
 		}
 
@@ -327,3 +415,19 @@ function shadow_customizer_output() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'shadow_customizer_output', 100 );
+
+/**
+ * Enqueue Customizer JS.
+ *
+ * Loads the theme's Customizer JavaScript that provides the custom
+ * functionality in the Customizer. Place any additional scripts in the
+ * /assets/scripts/ customize.js file instead of inline. This function
+ * enqueues the minified version of the JavaScript, for debugging it is
+ * recommended to load the non-minified version instead. Note that you will
+ * need to run `gulp` or `gulp scripts` to minify the JavaScript, or you
+ * could use another JavaScript minification tool.
+ */
+function shadow_customizer_controls() {
+	wp_enqueue_script( 'shadow-customize-js', get_stylesheet_directory_uri() . '/assets/scripts/customize.min.js', array( 'jquery' ), null, true );
+}
+add_action( 'customize_controls_enqueue_scripts', 'shadow_customizer_controls' );
