@@ -59,7 +59,7 @@ function shadow_frontpage() {
 		echo '<div class="front-page-posts">';
 		shadow_wrap_open();
 
-		$posts_title ? printf( '<h2>%s</h2>', $posts_title ) : '';
+		$posts_title ? printf( '<h2 class="posts-title">%s</h2>', $posts_title ) : '';
 
 		genesis_custom_loop( array(
 			'orderby'        => 'post_date',

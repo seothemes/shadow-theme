@@ -1215,6 +1215,10 @@ img.alignright,
 	.wrap > .button {
 		margin-bottom: 2em;
 	}
+
+	.posts-title {
+		margin-bottom: 2em;
+	}
 }
 
 /* Entry Content
@@ -1298,6 +1302,10 @@ img.alignright,
 
 	.entry-tags + & {
 		margin-top: 2em;
+	}
+
+	.front-page-posts & {
+		margin-bottom: 1em;
 	}
 }
 
@@ -1773,8 +1781,12 @@ p.form-submit,
 
 	.front-page-posts {
 		padding: 100px 0;
+
+		.posts-title {
+			margin-bottom: 0;
+		}
 	}
-	
+		
 	.after-entry .widget {
 		margin: 0 auto 100px;
 	}
