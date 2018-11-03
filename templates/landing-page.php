@@ -7,11 +7,11 @@
  * and only outputs the content. This is useful for creating custom
  * landing pages or to limit the amount of distractions for the user.
  *
- * @package      Shadow
- * @link         https://seothemes.net/shadow
+ * @package      SeoThemes\Shadow
+ * @link         https://seothemes.com/themes/shadow
  * @author       Seo Themes
- * @copyright    Copyright © 2017 Seo Themes
- * @license      GPL-2.0+
+ * @copyright    Copyright © 2018 SEO Themes
+ * @license      GPL-3.0-or-later
  */
 
 /**

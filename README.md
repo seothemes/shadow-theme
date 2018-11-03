@@ -8,7 +8,7 @@
 * Tags: one-column, responsive-layout, custom-menu, custom-logo, custom-header, custom-background, full-width-template, sticky-post, theme-options, threaded-comments, black, white.
 * Template: genesis
 * Template Version: 2.2.4
-* License: [GPL-2.0+](http://www.opensource.org/licenses/gpl-license.php)
+* License: [GPL-3.0-or-later](http://www.opensource.org/licenses/gpl-license.php)
 
 
 ## Installation

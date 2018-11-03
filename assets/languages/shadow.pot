@@ -1,0 +1,90 @@
+# Copyright (C) 2018 Shadow 1.0.0
+# This file is distributed under the same license as the Shadow 1.0.0 package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Shadow 1.0.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: front-page.php:52
+msgid "Latest Posts"
+msgstr ""
+
+#: front-page.php:55
+msgid "See all posts"
+msgstr ""
+
+#: includes/customize.php:52
+msgid "Your latest posts"
+msgstr ""
+
+#: includes/customize.php:53
+msgid "A static page & recent posts"
+msgstr ""
+
+#: includes/customize.php:60
+msgid "Front Page Settings"
+msgstr ""
+
+#: includes/customize.php:69
+msgid " Color"
+msgstr ""
+
+#: includes/customize.php:107
+msgid "Display recent posts"
+msgstr ""
+
+#: includes/customize.php:108
+msgid "Select whether to show the recent posts beneath the page content on the front page."
+msgstr ""
+
+#: includes/customize.php:113
+msgid "Show recent posts"
+msgstr ""
+
+#: includes/customize.php:114
+msgid "Hide recent posts"
+msgstr ""
+
+#: includes/customize.php:123
+msgid "Recent Posts"
+msgstr ""
+
+#: includes/customize.php:133
+msgid "Recent posts title"
+msgstr ""
+
+#: includes/customize.php:134
+msgid "Enter a title to show above the recent posts. Note that this is only displayed if the Display recent posts setting is set to true. Leave blank for no title."
+msgstr ""
+
+#: includes/customize.php:155
+msgid "Number of posts"
+msgstr ""
+
+#: includes/customize.php:156
+msgid "Enter the amount of posts to display on the front page. Note that this only controls the number of posts for the Static Front Page."
+msgstr ""
+
+#: includes/general.php:165
+msgid "Published"
+msgstr ""
+
+#: includes/general.php:166
+msgid "Categories"
+msgstr ""
+
+#: includes/setup.php:115
+msgid "Hero Image"
+msgstr ""
+
+#: templates/landing-page.php:3
+msgid "Landing Page"
+msgstr ""

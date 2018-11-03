@@ -1,16 +1,14 @@
 <?php
 /**
- * Theme Defaults.
+ * Shadow Theme
  *
- * This file contains all of the default theme settings that are
- * applied on switching or activating the theme. Simple Social Icons
- * defaults are also included with the theme but are not required.
+ * This file contains all of the default child theme settings.
  *
- * @package      Shadow
- * @link         https://seothemes.net/shadow
- * @author       Seo Themes
- * @copyright    Copyright © 2017 Seo Themes
- * @license      GPL-2.0+
+ * @package      SeoThemes\Shadow
+ * @link         https://seothemes.com/themes/shadow
+ * @author       SEO Themes
+ * @copyright    Copyright © 2018 SEO Themes
+ * @license      GPL-3.0-or-later
  */
 
 // If this file is called directly, abort.

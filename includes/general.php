@@ -1,42 +1,15 @@
 <?php
 /**
- * Theme Functions.
+ * Shadow Theme
  *
- * This file contains all of the helper functions and theme specific
- * functions that are too complex to be placed in the functions.php file.
+ * This file contains all of the general functionality for the child theme.
  *
- * @package      Shadow
- * @link         https://seothemes.net/shadow
- * @author       Seo Themes
- * @copyright    Copyright © 2017 Seo Themes
- * @license      GPL-2.0+
+ * @package      SeoThemes\Shadow
+ * @link         https://seothemes.com/themes/shadow
+ * @author       SEO Themes
+ * @copyright    Copyright © 2018 SEO Themes
+ * @license      GPL-3.0-or-later
  */
-
-/**
- * Enable features from Soil plugin if active https://roots.io/plugins/soil/.
- *
- * Soil is a plugin that heavily optimizes the default frontend
- * output of WordPress, but can sometimes cause minor issues with
- * the display of your site. If this happens simply remove the
- * plugin completely, or comment out the following 10 lines of code.
- *
- * For troubleshooting, comment out one line at a time to see what
- * is actually causing the problem, you can then safely use the rest
- * of the Soil features and benefit from the performance.
- *
- * If using Google Analytics, uncomment the following line and replace
- * `YOUR-GA-CODE` with your own unique Google Analytics tracking code:
- *
- * add_theme_support( 'soil-google-analytics', 'YOUR-GA-CODE' );
- */
-add_theme_support( 'soil-clean-up' );
-add_theme_support( 'soil-disable-asset-versioning' );
-add_theme_support( 'soil-disable-trackbacks' );
-add_theme_support( 'soil-jquery-cdn' );
-add_theme_support( 'soil-js-to-footer' );
-add_theme_support( 'soil-nav-walker' );
-add_theme_support( 'soil-nice-search' );
-add_theme_support( 'soil-relative-urls' );
 
 /**
  * Additional opening wrap.
@@ -71,70 +44,6 @@ add_action( 'genesis_entry_content', 'shadow_wrap_close', 14 );
 add_action( 'genesis_entry_footer', 'shadow_wrap_close', 14 );
 add_action( 'genesis_archive_title_descriptions', 'shadow_wrap_close', 14 );
 
-/**
- * Sanitize numbers.
- *
- * A helper function used to ensure that $number is an absolute
- * integer (whole number, zero or greater). If the input is an
- * absolute integer, return it; otherwise, return the default.
- *
- * @param  int $number The input number.
- * @param  obj $setting The setting id.
- * @return int Absolute integer.
- */
-function shadow_sanitize_number( $number, $setting ) {
-
-	$number = absint( $number );
-	return ( $number ? $number : $setting->default );
-}
-
-/**
- * Minify CSS helper function.
- *
- * A handy CSS minification script by Gary Jones that we'll use to
- * minify the CSS output by the customizer. This is called near the
- * end of the /includes/theme-customize.php file. A big thanks to
- * Gary for this one, works perfectly.
- *
- * @author Gary Jones
- * @link https://github.com/GaryJones/Simple-PHP-CSS-Minification
- * @param string $css CSS to minify.
- * @return string Minified CSS.
- */
-function shadow_minify_css( $css ) {
-
-	// Normalize whitespace.
-	$css = preg_replace( '/\s+/', ' ', $css );
-
-	// Remove spaces before and after comment.
-	$css = preg_replace( '/(\s+)(\/\*(.*?)\*\/)(\s+)/', '$2', $css );
-
-	// Remove comment blocks, everything between /* and */, unless preserved with /*! ... */ or /** ... */.
-	$css = preg_replace( '~/\*(?![\!|\*])(.*?)\*/~', '', $css );
-
-	// Remove ; before }.
-	$css = preg_replace( '/;(?=\s*})/', '', $css );
-
-	// Remove space after , : ; { } */ >.
-	$css = preg_replace( '/(,|:|;|\{|}|\*\/|>) /', '$1', $css );
-
-	// Remove space before , ; { } ( ) >.
-	$css = preg_replace( '/ (,|;|\{|}|\(|\)|>)/', '$1', $css );
-
-	// Strips leading 0 on decimal values (converts 0.5px into .5px).
-	$css = preg_replace( '/(:| )0\.([0-9]+)(%|em|ex|px|in|cm|mm|pt|pc)/i', '${1}.${2}${3}', $css );
-
-	// Strips units if value is 0 (converts 0px to 0).
-	$css = preg_replace( '/(:| )(\.?)0(%|em|ex|px|in|cm|mm|pt|pc)/i', '${1}0', $css );
-
-	// Converts all zeros value into short-hand.
-	$css = preg_replace( '/0 0 0 0/', '0', $css );
-
-	// Shorten 6-character hex color codes to 3-character where possible.
-	$css = preg_replace( '/#([a-f0-9])\\1([a-f0-9])\\2([a-f0-9])\\3/i', '#\1\2\3', $css );
-
-	return trim( $css );
-}
 
 /**
  * Accessible read more link.

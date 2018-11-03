@@ -8,11 +8,11 @@
  * The front-page template is delibirately left blank but still
  * included in the theme for the convenience of users.
  *
- * @package      Shadow
- * @link         https://seothemes.net/shadow
- * @author       Seo Themes
- * @copyright    Copyright © 2017 Seo Themes
- * @license      GPL-2.0+
+ * @package      SeoThemes\Shadow
+ * @link         https://seothemes.com/themes/shadow
+ * @author       SEO Themes
+ * @copyright    Copyright © 2018 SEO Themes
+ * @license      GPL-3.0-or-later
  */
 
 /**
